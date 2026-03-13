@@ -267,8 +267,47 @@
     }
 
     @media (max-width: 680px) {
+      .hero {
+        min-height: 50vh;
+        padding: 3.5rem 1.5rem 2.5rem;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .guide-link {
+        font-size: 0.82rem;
+        padding: 0.55rem 1.1rem;
+        margin-top: 1.4rem;
+      }
+
+      .section {
+        padding: 0 1.25rem 3rem;
+      }
+
       .tools-grid {
         grid-template-columns: 1fr;
+      }
+
+      .methodology {
+        padding: 0 1.25rem 2.5rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero {
+        min-height: auto;
+        padding: 2.5rem 1rem 2rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
       }
     }
 
