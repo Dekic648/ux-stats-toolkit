@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Research Statistics Toolkit</title>
+  <style>
+    /* ========================================
+       CSS Variables — Light / Dark
+       ======================================== */
+    :root {
+      --bg-0: #ffffff;
+      --bg-1: #f5f4f0;
+      --bg-2: #eeecea;
+      --bg-card: rgba(255, 255, 255, 0.65);
+      --text-0: #1a1a18;
+      --text-1: #5f5e5a;
+      --text-2: #888780;
+      --purple: #7F77DD;
+      --purple-glow: rgba(127, 119, 221, 0.25);
+      --purple-soft: rgba(127, 119, 221, 0.08);
+      --teal: #1D9E75;
+      --teal-soft: rgba(29, 158, 117, 0.10);
+      --border: rgba(0, 0, 0, 0.06);
+      --border-hover: rgba(127, 119, 221, 0.35);
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --card-shadow-hover: 0 8px 30px rgba(127, 119, 221, 0.18), 0 2px 8px rgba(0,0,0,0.06);
+      --dot-color: rgba(0, 0, 0, 0.04);
+      --mesh-a: rgba(127, 119, 221, 0.12);
+      --mesh-b: rgba(29, 158, 117, 0.10);
+      --mesh-c: rgba(127, 119, 221, 0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-0: #1c1c1a;
+        --bg-1: #252523;
+        --bg-2: #2e2e2b;
+        --bg-card: rgba(37, 37, 35, 0.6);
+        --text-0: #f0ede8;
+        --text-1: #b4b2a9;
+        --text-2: #888780;
+        --purple: #9F99E8;
+        --purple-glow: rgba(159, 153, 232, 0.22);
+        --purple-soft: rgba(159, 153, 232, 0.10);
+        --teal: #5DCAA5;
+        --teal-soft: rgba(93, 202, 165, 0.10);
+        --border: rgba(255, 255, 255, 0.06);
+        --border-hover: rgba(159, 153, 232, 0.35);
+        --card-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+        --card-shadow-hover: 0 8px 30px rgba(159, 153, 232, 0.15), 0 2px 8px rgba(0,0,0,0.3);
+        --dot-color: rgba(255, 255, 255, 0.03);
+        --mesh-a: rgba(159, 153, 232, 0.10);
+        --mesh-b: rgba(93, 202, 165, 0.08);
+        --mesh-c: rgba(159, 153, 232, 0.05);
+      }
+    }
+
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-0);
+      color: var(--text-0);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========================================
+       Dot Pattern Overlay
+       ======================================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========================================
+       Animated Mesh Gradient — Hero BG
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      top: -20%;
+      left: -20%;
+      background:
+        radial-gradient(ellipse 600px 500px at 30% 40%, var(--mesh-a) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 600px at 70% 60%, var(--mesh-b) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 400px at 50% 30%, var(--mesh-c) 0%, transparent 70%);
+      animation: meshDrift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes meshDrift {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(2%, -1%) scale(1.02);
+      }
+      66% {
+        transform: translate(-1%, 2%) scale(0.98);
+      }
+      100% {
+        transform: translate(1%, -1%) scale(1.01);
+      }
+    }
+
+    /* Soft pulsing glow behind title */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      animation: pulseGlow 5s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0%   { opacity: 0.5; transform: translate(-50%, -55%) scale(1); }
+      100% { opacity: 0.9; transform: translate(-50%, -55%) scale(1.15); }
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========================================
+       Hero Typography
+       ======================================== */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: var(--purple-soft);
+      border: 1px solid var(--border);
+      color: var(--purple);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      animation: fadeSlideUp 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      animation: fadeSlideUp 0.8s ease 0.1s both;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      max-width: 560px;
+      font-size: 1.15rem;
+      color: var(--text-1);
+      line-height: 1.65;
+      animation: fadeSlideUp 0.8s ease 0.2s both;
+    }
+
+    /* ========================================
+       Shared Animations
+       ======================================== */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       Section Layout
+       ======================================== */
+    .section {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 2rem;
+      animation: fadeSlideUp 0.8s ease 0.3s both;
+    }
+
+    /* ========================================
+       Tool Cards Grid
+       ======================================== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 680px) {
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tool-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      transition:
+        transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      cursor: pointer;
+
+      /* staggered entrance */
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+
+    .tool-card:nth-child(1) { animation-delay: 0.35s; }
+    .tool-card:nth-child(2) { animation-delay: 0.42s; }
+    .tool-card:nth-child(3) { animation-delay: 0.49s; }
+    .tool-card:nth-child(4) { animation-delay: 0.56s; }
+    .tool-card:nth-child(5) { animation-delay: 0.63s; }
+    .tool-card:nth-child(6) { animation-delay: 0.70s; }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .tool-card:active {
+      transform: translateY(-2px);
+      transition-duration: 0.1s;
+    }
+
+    /* Icon badge */
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .tool-card:hover .tool-icon {
+      transform: scale(1.08);
+    }
+
+    .tool-icon.purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .tool-icon.teal {
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+
+    .tool-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-0);
+    }
+
+    .tool-desc {
+      font-size: 0.9rem;
+      color: var(--text-1);
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .tool-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--purple);
+      margin-top: 0.25rem;
+      transition: gap 0.25s ease;
+    }
+
+    .tool-card:hover .tool-link {
+      gap: 9px;
+    }
+
+    .tool-link .arrow {
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+
+    .tool-card:hover .tool-link .arrow {
+      transform: translateX(2px);
+    }
+
+    /* ========================================
+       Methodology
+       ======================================== */
+    .methodology {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 1;
+      animation: fadeSlideUp 0.8s ease 0.85s both;
+    }
+
+    .methodology-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+      text-align: center;
+    }
+
+    .methodology p {
+      font-size: 0.92rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .methodology em {
+      color: var(--text-1);
+      font-style: normal;
+    }
+
+    /* ========================================
+       Footer
+       ======================================== */
+    footer {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeSlideUp 0.8s ease 0.95s both;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
+    }
+
+    footer span {
+      color: var(--text-1);
+      font-weight: 500;
+    }
+
+    /* ========================================
+       Scrollbar (subtle)
+       ======================================== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    /* ========================================
+       Selection color
+       ======================================== */
+    ::selection {
+      background: var(--purple-glow);
+      color: var(--text-0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <div class="hero-badge">Free &amp; Open Source</div>
+    <h1>UX Research<br><span class="accent">Statistics Toolkit</span></h1>
+    <p>Free, open-source tools for researchers who want to get the stats right. No logins. No tracking. Just math.</p>
+  </section>
+
+  <!-- ====== Tools ====== -->
+  <section class="section">
+    <div class="section-label">6 tools</div>
+    <div class="tools-grid">
+
+      <a class="tool-card" href="https://dekic648.github.io/adjusted-wald-ci-builder/" target="_blank" rel="noopener">
+        <div class="tool-icon purple">CI</div>
+        <div class="tool-name">Adjusted-Wald CI Builder</div>
+        <div class="tool-desc">Compute confidence intervals around task completion rates. Compares Adjusted-Wald, standard Wald, and LaPlace methods side by side.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="tool-card" href="https://dekic648.github.io/sample-size-negotiator/" target="_blank" rel="noopener">
+        <div class="tool-icon teal">n</div>
+        <div class="tool-name">Sample Size Negotiator</div>
+        <div class="tool-desc">See exactly what coverage you get at any sample size -- and generate a stakeholder explanation on the spot.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="tool-card" href="https://dekic648.github.io/significance-translator/" target="_blank" rel="noopener">
+        <div class="tool-icon purple">p</div>
+        <div class="tool-name">Significance Translator</div>
+        <div class="tool-desc">Enter a p-value. Get plain English, a stakeholder sentence, and a list of what your result does and doesn't mean.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="tool-card" href="https://dekic648.github.io/which-statistical-test/" target="_blank" rel="noopener">
+        <div class="tool-icon teal">?</div>
+        <div class="tool-name">Which Statistical Test?</div>
+        <div class="tool-desc">Answer three questions. Get the right test for your data, why it was chosen, and what to avoid.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="tool-card" href="https://dekic648.github.io/confidence-score-explainer/" target="_blank" rel="noopener">
+        <div class="tool-icon purple">%</div>
+        <div class="tool-name">Confidence Score Explainer</div>
+        <div class="tool-desc">Model the factors behind a finding's confidence score and generate a stakeholder-ready explanation.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+      <a class="tool-card" href="https://dekic648.github.io/problem-discovery-estimator/" target="_blank" rel="noopener">
+        <div class="tool-icon teal">#</div>
+        <div class="tool-name">Problem Discovery Estimator</div>
+        <div class="tool-desc">Estimate how many usability problems remain undiscovered and how many more participants you need.</div>
+        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ====== Methodology ====== -->
+  <section class="methodology">
+    <div class="methodology-inner">
+      <p>Built on <em>Sauro &amp; Lewis (2016)</em>, <em>Lewis (2001)</em>, and standard statistical methods used in quantitative UX research.</p>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer>
+    <p>Built by <span>Milo Vandekic</span></p>
+  </footer>
+
+</body>
+</html>
