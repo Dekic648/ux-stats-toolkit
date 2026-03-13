@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Common Sense Guide Through the UX Statistics Kit</title>
+  <style>
+    /* ========================================
+       CSS Variables — Light / Dark
+       ======================================== */
+    :root {
+      --bg-0: #ffffff;
+      --bg-1: #f5f4f0;
+      --bg-2: #eeecea;
+      --bg-card: rgba(255, 255, 255, 0.65);
+      --text-0: #1a1a18;
+      --text-1: #5f5e5a;
+      --text-2: #888780;
+      --purple: #7F77DD;
+      --purple-glow: rgba(127, 119, 221, 0.25);
+      --purple-soft: rgba(127, 119, 221, 0.08);
+      --teal: #1D9E75;
+      --teal-soft: rgba(29, 158, 117, 0.10);
+      --border: rgba(0, 0, 0, 0.06);
+      --border-hover: rgba(127, 119, 221, 0.35);
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --dot-color: rgba(0, 0, 0, 0.04);
+      --mesh-a: rgba(127, 119, 221, 0.12);
+      --mesh-b: rgba(29, 158, 117, 0.10);
+      --mesh-c: rgba(127, 119, 221, 0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-0: #1c1c1a;
+        --bg-1: #252523;
+        --bg-2: #2e2e2b;
+        --bg-card: rgba(37, 37, 35, 0.6);
+        --text-0: #f0ede8;
+        --text-1: #b4b2a9;
+        --text-2: #888780;
+        --purple: #9F99E8;
+        --purple-glow: rgba(159, 153, 232, 0.22);
+        --purple-soft: rgba(159, 153, 232, 0.10);
+        --teal: #5DCAA5;
+        --teal-soft: rgba(93, 202, 165, 0.10);
+        --border: rgba(255, 255, 255, 0.06);
+        --border-hover: rgba(159, 153, 232, 0.35);
+        --card-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+        --dot-color: rgba(255, 255, 255, 0.03);
+        --mesh-a: rgba(159, 153, 232, 0.10);
+        --mesh-b: rgba(93, 202, 165, 0.08);
+        --mesh-c: rgba(159, 153, 232, 0.05);
+      }
+    }
+
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-0);
+      color: var(--text-0);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========================================
+       Dot Pattern Overlay
+       ======================================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========================================
+       Sticky Header
+       ======================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-0);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg-0) 80%, transparent);
+    }
+
+    .header-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .header-home {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--purple);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-home:hover {
+      opacity: 0.75;
+    }
+
+    .header-title {
+      font-size: 0.78rem;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       Hero
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      top: -20%;
+      left: -20%;
+      background:
+        radial-gradient(ellipse 600px 500px at 30% 40%, var(--mesh-a) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 600px at 70% 60%, var(--mesh-b) 0%, transparent 70%),
+        radial-gradient(ellipse 800px 400px at 50% 30%, var(--mesh-c) 0%, transparent 70%);
+      animation: meshDrift 12s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes meshDrift {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(2%, -1%) scale(1.02); }
+      66%  { transform: translate(-1%, 2%) scale(0.98); }
+      100% { transform: translate(1%, -1%) scale(1.01); }
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      animation: pulseGlow 5s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0%   { opacity: 0.5; transform: translate(-50%, -55%) scale(1); }
+      100% { opacity: 0.9; transform: translate(-50%, -55%) scale(1.15); }
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      max-width: 720px;
+      animation: fadeSlideUp 0.8s ease 0.1s both;
+    }
+
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .tagline {
+      max-width: 560px;
+      font-size: 1.1rem;
+      color: var(--text-1);
+      line-height: 1.65;
+      animation: fadeSlideUp 0.8s ease 0.2s both;
+    }
+
+    /* ========================================
+       Animations
+       ======================================== */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================
+       Table of Contents
+       ======================================== */
+    .toc {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+      position: relative;
+      z-index: 1;
+      animation: fadeSlideUp 0.8s ease 0.3s both;
+    }
+
+    .toc-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 1rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
+
+    .toc-list li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-1);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .toc-list li a:hover {
+      border-color: var(--border-hover);
+      color: var(--purple);
+      background: var(--purple-soft);
+    }
+
+    .toc-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--purple);
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background: var(--purple-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ========================================
+       Chapter Sections
+       ======================================== */
+    .chapter-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2rem 4.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+      padding-top: 1rem;
+    }
+
+    .chapter-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .chapter-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
+
+    .chapter-body p {
+      font-size: 1.02rem;
+      line-height: 1.78;
+      color: var(--text-0);
+      margin-bottom: 1.4rem;
+    }
+
+    .chapter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .chapter-body .tool-ref {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .chapter-body .tool-ref:hover {
+      border-bottom-color: var(--purple);
+    }
+
+    .chapter-divider {
+      max-width: 680px;
+      margin: 0 auto 0;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chapter-divider hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    /* ========================================
+       Footer
+       ======================================== */
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
+    }
+
+    footer span {
+      color: var(--text-1);
+      font-weight: 500;
+    }
+
+    footer a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ========================================
+       Scrollbar
+       ======================================== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    /* ========================================
+       Selection color
+       ======================================== */
+    ::selection {
+      background: var(--purple-glow);
+      color: var(--text-0);
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 600px) {
+      .hero {
+        min-height: 40vh;
+        padding: 4rem 1.5rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+
+      .toc,
+      .chapter-section,
+      .chapter-divider {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .toc-list {
+        flex-direction: column;
+      }
+
+      .header-title {
+        display: none;
+      }
+
+      footer {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== Header ====== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-home">&larr; UX Stats Toolkit</a>
+      <div class="header-title">A Common Sense Guide</div>
+    </div>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero">
+    <h1>A Common Sense Guide Through the <span class="accent">UX Statistics Kit</span></h1>
+    <p class="tagline">Every tool exists because of a real problem. Here's the problem — and why the math matters.</p>
+  </section>
+
+  <!-- ====== Table of Contents ====== -->
+  <nav class="toc">
+    <div class="toc-label">Chapters</div>
+    <ol class="toc-list">
+      <li><a href="#planning"><span class="toc-num">1</span> Planning</a></li>
+      <li><a href="#collecting"><span class="toc-num">2</span> Collecting &amp; Coding</a></li>
+      <li><a href="#analyzing"><span class="toc-num">3</span> Analyzing</a></li>
+      <li><a href="#rating"><span class="toc-num">4</span> Rating &amp; Scoring</a></li>
+      <li><a href="#reporting"><span class="toc-num">5</span> Reporting</a></li>
+    </ol>
+  </nav>
+
+  <!-- ====== Chapter 1: Planning ====== -->
+  <section class="chapter-section" id="planning">
+    <div class="chapter-header">
+      <div class="chapter-number">1</div>
+      <div class="chapter-title">Planning</div>
+    </div>
+    <div class="chapter-body">
+      <p>Every study starts with the same negotiation: someone asks how many participants you need, and your answer is going to disappoint them. The textbook says "5 users find 85% of problems" — a statistic so widely misquoted it's practically folklore. The real answer depends on problem frequency, task complexity, and how much residual risk your stakeholders can stomach. Most researchers know this intuitively, but when a VP asks "why can't we just test with 3?" you need more than intuition. You need the math, explained in a sentence they'll actually read.</p>
+
+      <p>What goes wrong without it is predictable: you either over-test and waste budget, or under-test and ship findings that quietly miss half the problems. Worse, you can't articulate the trade-off. You end up saying "best practice is 5" and hoping nobody pushes back. When they do — and they always do — you've got nothing to stand on. The planning phase is where credibility is built or lost, and most researchers lose it here because they can't quantify what they're trading away.</p>
+
+      <p>The <a href="https://dekic648.github.io/sample-size-negotiator/" target="_blank" rel="noopener" class="tool-ref">Sample Size Negotiator</a> lets you model exactly what coverage you get at any sample size, based on actual discovery probability — and generates a plain-language explanation you can drop into a Slack message or a study plan. It turns the negotiation from opinion-based to evidence-based. For the cases where the sample is already locked in (your client gave you 5 users, take it or leave it), the <a href="https://dekic648.github.io/small-n-capability-checker/" target="_blank" rel="noopener" class="tool-ref">Small n Capability Checker</a> tells you what that sample can and cannot detect — so you set expectations upfront instead of apologizing after delivery.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider"><hr></div>
+
+  <!-- ====== Chapter 2: Collecting & Coding ====== -->
+  <section class="chapter-section" id="collecting">
+    <div class="chapter-header">
+      <div class="chapter-number">2</div>
+      <div class="chapter-title">Collecting &amp; Coding</div>
+    </div>
+    <div class="chapter-body">
+      <p>You've run the sessions. You've got recordings, notes, maybe a spreadsheet with task outcomes. Now comes the part that separates rigorous research from expensive opinion: coding the data. Did the participant succeed or fail? Was that a hesitation or a genuine error? Did they recover, or did they just stop trying? These judgment calls happen hundreds of times in a single study, and most teams never check whether their judgments are consistent — even with themselves, let alone with each other.</p>
+
+      <p>The cost of sloppy coding is invisible but compounding. If two analysts disagree on what counts as a "failure" 30% of the time, your success rates are noise. Your severity ratings inherit that noise. Your entire report is built on a foundation that nobody verified. The worst part? You'll never know. The findings will look crisp and confident in the deck. They'll just be wrong in ways that only matter when someone tries to reproduce the study or track improvements over time.</p>
+
+      <p>The <a href="https://dekic648.github.io/behaviour-matrix-ci-builder/" target="_blank" rel="noopener" class="tool-ref">Behaviour Matrix + CI Builder</a> gives you a structured way to log observed behaviours per task across participants, compute success and failure rates, and immediately see the confidence intervals around those rates. It forces the discipline of consistent coding while giving you the statistical output in one view. And before you commit to those codes, the <a href="https://dekic648.github.io/inter-rater-reliability/" target="_blank" rel="noopener" class="tool-ref">Inter-rater Reliability</a> tool lets you check agreement between two raters using Cohen's Kappa — because percent agreement alone is misleading when your categories are unbalanced. If your Kappa is below 0.6, your coding scheme needs work before you go any further.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider"><hr></div>
+
+  <!-- ====== Chapter 3: Analyzing ====== -->
+  <section class="chapter-section" id="analyzing">
+    <div class="chapter-header">
+      <div class="chapter-number">3</div>
+      <div class="chapter-title">Analyzing</div>
+    </div>
+    <div class="chapter-body">
+      <p>Analysis is where most UX researchers quietly panic. You've got task completion rates, maybe some time-on-task data, possibly a set of Likert responses. You know you should do "something statistical" but the options are overwhelming and the consequences of choosing wrong range from embarrassing to career-damaging. Run a t-test on ordinal data and a statistician will rightly question everything else in your report. Report a confidence interval using the standard Wald method on a sample of 8 and your intervals might dip below zero — which is meaningless for a proportion. These aren't obscure edge cases. They're Tuesday.</p>
+
+      <p>The real damage isn't methodological shame — it's bad decisions. A stakeholder sees "78% completion rate" and thinks the design is working. They don't see that the 95% confidence interval stretches from 45% to 95%, which means the true rate could easily be a coin flip. Without intervals, without appropriate tests, without honest interpretation of significance, your analysis is giving false precision to uncertain data. People make roadmap decisions based on numbers you presented without context. That's on you.</p>
+
+      <p>The <a href="https://dekic648.github.io/adjusted-wald-ci-builder/" target="_blank" rel="noopener" class="tool-ref">Adjusted-Wald CI Builder</a> computes confidence intervals around proportions using the method that actually works at small sample sizes — and shows you the standard Wald and LaPlace alternatives side by side so you can see the difference yourself. When you're not sure which test to run in the first place, <a href="https://dekic648.github.io/which-statistical-test/" target="_blank" rel="noopener" class="tool-ref">Which Statistical Test?</a> walks you through three questions and tells you the right test for your data, why it was chosen, and what to avoid. And once you have a p-value, the <a href="https://dekic648.github.io/significance-translator/" target="_blank" rel="noopener" class="tool-ref">Significance Translator</a> converts it into plain language — including a stakeholder-ready sentence and an explicit list of what the result does and does not mean. Because "p = 0.03" means nothing to a product manager, and "statistically significant" means too many things to too many people.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider"><hr></div>
+
+  <!-- ====== Chapter 4: Rating & Scoring ====== -->
+  <section class="chapter-section" id="rating">
+    <div class="chapter-header">
+      <div class="chapter-number">4</div>
+      <div class="chapter-title">Rating &amp; Scoring</div>
+    </div>
+    <div class="chapter-body">
+      <p>Severity ratings are the most politically loaded numbers in UX research. A "critical" rating gets executive attention and immediate developer time. A "minor" rating gets filed and forgotten. The difference between the two is often one researcher's gut feeling, unchecked against any framework, uncompared to any baseline. Two researchers looking at the same finding will regularly rate it differently — not because one is wrong, but because neither is using a shared definition of what "severity" means. The result is inconsistency within reports, across projects, and over time.</p>
+
+      <p>The problem compounds when you try to communicate confidence. Saying "we're fairly confident this is a real issue" tells a stakeholder nothing actionable. Fairly confident compared to what? Based on what evidence? Observed by how many participants under what conditions? Without structure, confidence becomes a vibe — and stakeholders either over-trust it or dismiss it entirely. Qualitative findings suffer the most here, because there's a widespread assumption that if you can't put a number on it, you can't assess its strength. That assumption is wrong, but you need a rubric to prove it.</p>
+
+      <p>The <a href="https://dekic648.github.io/severity-rating-calibrator/" target="_blank" rel="noopener" class="tool-ref">Severity Rating Calibrator</a> lets you rate problems against two established frameworks — UserFocus and Nielsen — side by side, producing a report-ready severity statement with the reasoning baked in. The <a href="https://dekic648.github.io/confidence-score-explainer/" target="_blank" rel="noopener" class="tool-ref">Confidence Score Explainer</a> models the factors behind a finding's confidence — sample evidence, consistency, triangulation — and generates an explanation that a stakeholder can actually evaluate. And for the findings that live purely in qualitative territory, the <a href="https://dekic648.github.io/qualitative-finding-strength/" target="_blank" rel="noopener" class="tool-ref">Qualitative Finding Strength Rater</a> provides a structured rubric so you can rate evidential strength without pretending you have quantitative data. It moves severity from opinion to method.</p>
+    </div>
+  </section>
+
+  <div class="chapter-divider"><hr></div>
+
+  <!-- ====== Chapter 5: Reporting ====== -->
+  <section class="chapter-section" id="reporting">
+    <div class="chapter-header">
+      <div class="chapter-number">5</div>
+      <div class="chapter-title">Reporting</div>
+    </div>
+    <div class="chapter-body">
+      <p>Reporting is where the study either lands or doesn't. You've done the work — planned carefully, coded consistently, analyzed honestly, rated with frameworks. And now you need to communicate all of it to people who will spend approximately 90 seconds on your findings before making a decision. The temptation is to simplify: here are the top 5 problems, ranked by severity, go fix them. But that simplification hides something critical: how much you didn't find. Every study has a discovery ceiling, and most reports never mention it. Stakeholders walk away thinking they've seen the full picture. They haven't.</p>
+
+      <p>The other reporting failure is around uncertainty. Researchers are trained to be honest about limitations, but "limitations" sections in reports are where honesty goes to die — buried at the bottom, written in hedging language, read by nobody. What stakeholders actually need is structured uncertainty: what do we know, what don't we know, and what would it take to find out. Not a disclaimer paragraph. A framework they can use to calibrate their confidence in your findings and decide whether to act now or investigate further.</p>
+
+      <p>The <a href="https://dekic648.github.io/problem-discovery-estimator/" target="_blank" rel="noopener" class="tool-ref">Problem Discovery Estimator</a> uses your observed discovery rate to estimate how many problems remain undiscovered and how many additional participants you'd need to find them. It gives you a concrete number to put in front of a stakeholder: "We've likely found 75% of problems at this frequency. Here's what it would take to get to 90%." That's a conversation about trade-offs, not a limitation buried in an appendix. The <a href="https://dekic648.github.io/finding-uncertainty-communicator/" target="_blank" rel="noopener" class="tool-ref">Finding Uncertainty Communicator</a> takes it further, helping you frame each finding in terms of what you know, what you don't, and what you'd need to resolve the gap. It turns uncertainty from a weakness into a signal — which is what it always was.</p>
+    </div>
+  </section>
+
+  <!-- ====== Footer ====== -->
+  <footer>
+    <p>Built by <span>Milo Vandekic</span> &middot; Grounded in <a href="https://groundedly.vercel.app" target="_blank" rel="noopener">Groundedly</a></p>
+  </footer>
+
+</body>
+</html>

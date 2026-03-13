@@ -494,6 +494,40 @@
       background: var(--purple-glow);
       color: var(--text-0);
     }
+
+    /* ========================================
+       Guide Link
+       ======================================== */
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-1);
+      transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+      animation: fadeSlideUp 0.8s ease 0.3s both;
+    }
+
+    .guide-link:hover {
+      border-color: var(--border-hover);
+      color: var(--purple);
+      background: var(--purple-soft);
+      transform: translateY(-2px);
+    }
+
+    .guide-link .guide-icon {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
@@ -503,6 +537,7 @@
     <div class="hero-badge">Free &amp; Open Source</div>
     <h1>UX Research<br><span class="accent">Statistics Toolkit</span></h1>
     <p>Free, open-source tools for researchers who want to get the stats right. No logins. No tracking. Just math.</p>
+    <a href="guide.html" class="guide-link"><span class="guide-icon">&#9782;</span> Read the Common Sense Guide</a>
   </section>
 
   <!-- ====== Tools ====== -->
