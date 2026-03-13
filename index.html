@@ -301,9 +301,47 @@
     .tool-card:nth-child(2) { animation-delay: 0.42s; }
     .tool-card:nth-child(3) { animation-delay: 0.49s; }
     .tool-card:nth-child(4) { animation-delay: 0.56s; }
-    .tool-card:nth-child(5) { animation-delay: 0.63s; }
-    .tool-card:nth-child(6) { animation-delay: 0.70s; }
-    .tool-card:nth-child(7) { animation-delay: 0.77s; }
+
+    /* ========================================
+       Chapter Headers
+       ======================================== */
+    .chapter {
+      margin-bottom: 2.5rem;
+    }
+
+    .chapter:last-child {
+      margin-bottom: 0;
+    }
+
+    .chapter-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+
+    .chapter-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .chapter-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-1);
+    }
 
     .tool-card:hover {
       transform: translateY(-4px);
@@ -469,59 +507,130 @@
 
   <!-- ====== Tools ====== -->
   <section class="section">
-    <div class="section-label">7 tools</div>
-    <div class="tools-grid">
+    <div class="section-label">12 tools · 5 chapters</div>
 
-      <a class="tool-card" href="https://dekic648.github.io/adjusted-wald-ci-builder/" target="_blank" rel="noopener">
-        <div class="tool-icon purple">CI</div>
-        <div class="tool-name">Adjusted-Wald CI Builder</div>
-        <div class="tool-desc">Compute confidence intervals around task completion rates. Compares Adjusted-Wald, standard Wald, and LaPlace methods side by side.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/sample-size-negotiator/" target="_blank" rel="noopener">
-        <div class="tool-icon teal">n</div>
-        <div class="tool-name">Sample Size Negotiator</div>
-        <div class="tool-desc">See exactly what coverage you get at any sample size -- and generate a stakeholder explanation on the spot.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/significance-translator/" target="_blank" rel="noopener">
-        <div class="tool-icon purple">p</div>
-        <div class="tool-name">Significance Translator</div>
-        <div class="tool-desc">Enter a p-value. Get plain English, a stakeholder sentence, and a list of what your result does and doesn't mean.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/which-statistical-test/" target="_blank" rel="noopener">
-        <div class="tool-icon teal">?</div>
-        <div class="tool-name">Which Statistical Test?</div>
-        <div class="tool-desc">Answer three questions. Get the right test for your data, why it was chosen, and what to avoid.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/confidence-score-explainer/" target="_blank" rel="noopener">
-        <div class="tool-icon purple">%</div>
-        <div class="tool-name">Confidence Score Explainer</div>
-        <div class="tool-desc">Model the factors behind a finding's confidence score and generate a stakeholder-ready explanation.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/problem-discovery-estimator/" target="_blank" rel="noopener">
-        <div class="tool-icon teal">#</div>
-        <div class="tool-name">Problem Discovery Estimator</div>
-        <div class="tool-desc">Estimate how many usability problems remain undiscovered and how many more participants you need.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
-      <a class="tool-card" href="https://dekic648.github.io/severity-rating-calibrator/" target="_blank" rel="noopener">
-        <div class="tool-icon purple">S</div>
-        <div class="tool-name">Severity Rating Calibrator</div>
-        <div class="tool-desc">Rate usability problems with two frameworks (UserFocus + Nielsen) side by side and get a report-ready severity statement.</div>
-        <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
-      </a>
-
+    <!-- Chapter 1: Planning -->
+    <div class="chapter">
+      <div class="chapter-header" style="animation-delay:0.3s">
+        <div class="chapter-number">1</div>
+        <div class="chapter-title">Planning</div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="https://dekic648.github.io/sample-size-negotiator/" target="_blank" rel="noopener">
+          <div class="tool-icon teal">n</div>
+          <div class="tool-name">Sample Size Negotiator</div>
+          <div class="tool-desc">See exactly what coverage you get at any sample size — and generate a stakeholder explanation on the spot.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/small-n-capability-checker/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">5</div>
+          <div class="tool-name">Small n Capability Checker</div>
+          <div class="tool-desc">Check what your small sample can actually detect — before you promise stakeholders something your study can't deliver.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
     </div>
+
+    <!-- Chapter 2: Collecting & Coding -->
+    <div class="chapter">
+      <div class="chapter-header" style="animation-delay:0.45s">
+        <div class="chapter-number">2</div>
+        <div class="chapter-title">Collecting &amp; Coding</div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="https://dekic648.github.io/behaviour-matrix-ci-builder/" target="_blank" rel="noopener">
+          <div class="tool-icon teal">M</div>
+          <div class="tool-name">Behaviour Matrix + CI Builder</div>
+          <div class="tool-desc">Log observed behaviours per task, compute success/failure rates, and get Adjusted-Wald confidence intervals in one matrix view.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/inter-rater-reliability/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">&kappa;</div>
+          <div class="tool-name">Inter-rater Reliability</div>
+          <div class="tool-desc">Calculate agreement between two raters using Cohen's Kappa and percent agreement — validate your coding scheme.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Chapter 3: Analyzing -->
+    <div class="chapter">
+      <div class="chapter-header" style="animation-delay:0.6s">
+        <div class="chapter-number">3</div>
+        <div class="chapter-title">Analyzing</div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="https://dekic648.github.io/adjusted-wald-ci-builder/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">CI</div>
+          <div class="tool-name">Adjusted-Wald CI Builder</div>
+          <div class="tool-desc">Compute confidence intervals around task completion rates. Compares Adjusted-Wald, standard Wald, and LaPlace methods side by side.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/which-statistical-test/" target="_blank" rel="noopener">
+          <div class="tool-icon teal">?</div>
+          <div class="tool-name">Which Statistical Test?</div>
+          <div class="tool-desc">Answer three questions. Get the right test for your data, why it was chosen, and what to avoid.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/significance-translator/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">p</div>
+          <div class="tool-name">Significance Translator</div>
+          <div class="tool-desc">Enter a p-value. Get plain English, a stakeholder sentence, and a list of what your result does and doesn't mean.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Chapter 4: Rating & Scoring -->
+    <div class="chapter">
+      <div class="chapter-header" style="animation-delay:0.75s">
+        <div class="chapter-number">4</div>
+        <div class="chapter-title">Rating &amp; Scoring</div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="https://dekic648.github.io/severity-rating-calibrator/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">S</div>
+          <div class="tool-name">Severity Rating Calibrator</div>
+          <div class="tool-desc">Rate usability problems with two frameworks (UserFocus + Nielsen) side by side and get a report-ready severity statement.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/confidence-score-explainer/" target="_blank" rel="noopener">
+          <div class="tool-icon teal">%</div>
+          <div class="tool-name">Confidence Score Explainer</div>
+          <div class="tool-desc">Model the factors behind a finding's confidence score and generate a stakeholder-ready explanation.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/qualitative-finding-strength/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">Q</div>
+          <div class="tool-name">Qualitative Finding Strength Rater</div>
+          <div class="tool-desc">Rate the evidential strength of qualitative findings using a structured rubric — move beyond gut-feel severity ratings.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Chapter 5: Reporting -->
+    <div class="chapter">
+      <div class="chapter-header" style="animation-delay:0.9s">
+        <div class="chapter-number">5</div>
+        <div class="chapter-title">Reporting</div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="https://dekic648.github.io/problem-discovery-estimator/" target="_blank" rel="noopener">
+          <div class="tool-icon teal">#</div>
+          <div class="tool-name">Problem Discovery Estimator</div>
+          <div class="tool-desc">Estimate how many usability problems remain undiscovered and how many more participants you need.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+        <a class="tool-card" href="https://dekic648.github.io/finding-uncertainty-communicator/" target="_blank" rel="noopener">
+          <div class="tool-icon purple">&plusmn;</div>
+          <div class="tool-name">Finding Uncertainty Communicator</div>
+          <div class="tool-desc">Frame what you know, what you don't, and what you still need to find out — structured uncertainty reporting.</div>
+          <div class="tool-link">Open tool <span class="arrow">&rarr;</span></div>
+        </a>
+      </div>
+    </div>
+
   </section>
 
   <!-- ====== Methodology ====== -->
