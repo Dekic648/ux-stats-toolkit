@@ -365,39 +365,31 @@
       transition-duration: 0.1s;
     }
 
-    /* Icon badge */
+    /* Icon badge — hidden */
     .tool-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .tool-card:hover .tool-icon {
-      transform: scale(1.08);
-    }
-
-    .tool-icon.purple {
-      background: var(--purple-soft);
-      color: var(--purple);
-    }
-
-    .tool-icon.teal {
-      background: var(--teal-soft);
-      color: var(--teal);
+      display: none;
     }
 
     .tool-name {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: var(--text-0);
+      line-height: 1.3;
+    }
+
+    .tool-card:nth-child(odd) .tool-name {
+      background: linear-gradient(135deg, var(--purple), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tool-card:nth-child(even) .tool-name {
+      background: linear-gradient(135deg, var(--teal), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .tool-desc {
@@ -543,33 +535,25 @@
        Pixel Mole — peeks from bottom of hero
        ======================================== */
     .mole-wrap {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
+      margin: 2rem auto 0;
+      width: fit-content;
       z-index: 3;
       pointer-events: none;
       transition: transform 0.15s ease-out;
     }
 
     .mole-ground {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 72px;
-      height: 7px;
-      background: var(--border);
-      border-radius: 3px 3px 0 0;
-      z-index: 4;
+      display: none;
     }
 
     .mole-pixel {
       width: 6px;
       height: 6px;
+      background: transparent;
       position: relative;
       bottom: 8px;
-      animation: moleBlink 4s step-end infinite;
+      animation: moleBlink 1s step-end infinite;
       box-shadow:
         /* R0 — top of head */
         12px 0 0 var(--teal), 18px 0 0 var(--teal), 24px 0 0 var(--teal), 30px 0 0 var(--teal),
@@ -584,7 +568,7 @@
         /* R5 — chin */
         12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
         /* R6 — paws */
-        6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
+        6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 18px 36px 0 var(--teal), 24px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
     }
 
     @keyframes moleBlink {
@@ -596,7 +580,7 @@
           0px 18px 0 var(--teal), 6px 18px 0 var(--teal), 12px 18px 0 var(--teal), 18px 18px 0 var(--teal), 24px 18px 0 var(--teal), 30px 18px 0 var(--teal), 36px 18px 0 var(--teal), 42px 18px 0 var(--teal),
           6px 24px 0 var(--teal), 12px 24px 0 var(--teal), 18px 24px 0 #d4845a, 24px 24px 0 #d4845a, 30px 24px 0 var(--teal), 36px 24px 0 var(--teal),
           12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
-          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
+          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 18px 36px 0 var(--teal), 24px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
       }
       93%, 97% {
         box-shadow:
@@ -606,13 +590,13 @@
           0px 18px 0 var(--teal), 6px 18px 0 var(--teal), 12px 18px 0 var(--teal), 18px 18px 0 var(--teal), 24px 18px 0 var(--teal), 30px 18px 0 var(--teal), 36px 18px 0 var(--teal), 42px 18px 0 var(--teal),
           6px 24px 0 var(--teal), 12px 24px 0 var(--teal), 18px 24px 0 #d4845a, 24px 24px 0 #d4845a, 30px 24px 0 var(--teal), 36px 24px 0 var(--teal),
           12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
-          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
+          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 18px 36px 0 var(--teal), 24px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
       }
     }
 
     @media (max-width: 680px) {
       .mole-wrap { transform: translateX(-50%) scale(0.75); }
-      .mole-ground { width: 60px; height: 6px; }
+      .mole-ground { display: none; }
     }
   </style>
 </head>
@@ -624,7 +608,6 @@
     <h1>UX Research<br><span class="accent">Statistics Toolkit</span></h1>
     <p>Free, open-source tools for researchers who want to get the stats right. No logins. No tracking. Just math.</p>
     <a href="guide.html" class="guide-link"><span class="guide-icon">&#9782;</span> Read the Common Sense Guide</a>
-    <div class="mole-ground"></div>
     <div class="mole-wrap" id="mole"><div class="mole-pixel"></div></div>
   </section>
 
