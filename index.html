@@ -93,7 +93,7 @@
     }
 
     /* ========================================
-       Hero — dark-first, OpenClaw-inspired
+       Hero
        ======================================== */
     .hero {
       position: relative;
@@ -104,29 +104,16 @@
       text-align: center;
       padding: 5rem 2rem 4rem;
       overflow: hidden;
-      background: #0c0c0b;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* Subtle noise/grain overlay */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Centered glow orb */
+    /* Soft glow orb */
     .hero::after {
       content: '';
       position: absolute;
-      width: 600px;
-      height: 600px;
+      width: 500px;
+      height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(127,119,221,0.15) 0%, rgba(29,158,117,0.06) 40%, transparent 70%);
+      background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -136,13 +123,13 @@
     }
 
     @keyframes heroGlow {
-      0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+      0%   { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.12); }
     }
 
     .hero > * {
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     /* ========================================
@@ -154,9 +141,9 @@
       gap: 8px;
       padding: 5px 14px;
       border-radius: 100px;
-      background: rgba(127,119,221,0.08);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #9F99E8;
+      background: var(--purple-soft);
+      border: 1px solid var(--border);
+      color: var(--purple);
       font-size: 0.72rem;
       font-weight: 600;
       letter-spacing: 0.06em;
@@ -170,7 +157,7 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: #5DCAA5;
+      background: var(--teal);
       animation: badgePulse 2.5s ease-in-out infinite;
     }
 
@@ -185,12 +172,12 @@
       letter-spacing: -0.04em;
       line-height: 1.08;
       margin-bottom: 1.2rem;
-      color: #f0ede8;
+      color: var(--text-0);
       animation: fadeSlideUp 0.8s ease 0.1s both;
     }
 
     .hero h1 .accent {
-      background: linear-gradient(135deg, #9F99E8 0%, #5DCAA5 100%);
+      background: linear-gradient(135deg, var(--purple), var(--teal));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -199,7 +186,7 @@
     .hero p {
       max-width: 520px;
       font-size: 1.05rem;
-      color: #908f88;
+      color: var(--text-1);
       line-height: 1.7;
       animation: fadeSlideUp 0.8s ease 0.2s both;
     }
@@ -529,20 +516,22 @@
       margin-top: 2rem;
       padding: 0.6rem 1.3rem;
       border-radius: 8px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 500;
-      color: #b4b2a9;
+      color: var(--text-1);
       transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
       animation: fadeSlideUp 0.8s ease 0.3s both;
     }
 
     .guide-link:hover {
-      border-color: rgba(159,153,232,0.3);
-      color: #9F99E8;
-      background: rgba(159,153,232,0.06);
+      border-color: var(--border-hover);
+      color: var(--purple);
+      background: var(--purple-soft);
     }
 
     .guide-link .guide-icon {
