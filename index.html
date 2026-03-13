@@ -557,63 +557,62 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 52px;
-      height: 6px;
+      width: 72px;
+      height: 7px;
       background: var(--border);
       border-radius: 3px 3px 0 0;
       z-index: 4;
     }
 
     .mole-pixel {
-      width: 4px;
-      height: 4px;
+      width: 6px;
+      height: 6px;
       position: relative;
-      bottom: 6px;
+      bottom: 8px;
       animation: moleBlink 4s step-end infinite;
       box-shadow:
         /* R0 — top of head */
-        8px 0 0 var(--teal), 12px 0 0 var(--teal), 16px 0 0 var(--teal), 20px 0 0 var(--teal),
+        12px 0 0 var(--teal), 18px 0 0 var(--teal), 24px 0 0 var(--teal), 30px 0 0 var(--teal),
         /* R1 */
-        4px 4px 0 var(--teal), 8px 4px 0 var(--teal), 12px 4px 0 var(--teal), 16px 4px 0 var(--teal), 20px 4px 0 var(--teal), 24px 4px 0 var(--teal),
+        6px 6px 0 var(--teal), 12px 6px 0 var(--teal), 18px 6px 0 var(--teal), 24px 6px 0 var(--teal), 30px 6px 0 var(--teal), 36px 6px 0 var(--teal),
         /* R2 — eyes open */
-        0px 8px 0 var(--teal), 4px 8px 0 var(--teal), 8px 8px 0 #fff, 12px 8px 0 var(--teal), 16px 8px 0 var(--teal), 20px 8px 0 #fff, 24px 8px 0 var(--teal), 28px 8px 0 var(--teal),
+        0px 12px 0 var(--teal), 6px 12px 0 var(--teal), 12px 12px 0 #fff, 18px 12px 0 var(--teal), 24px 12px 0 var(--teal), 30px 12px 0 #fff, 36px 12px 0 var(--teal), 42px 12px 0 var(--teal),
         /* R3 */
-        0px 12px 0 var(--teal), 4px 12px 0 var(--teal), 8px 12px 0 var(--teal), 12px 12px 0 var(--teal), 16px 12px 0 var(--teal), 20px 12px 0 var(--teal), 24px 12px 0 var(--teal), 28px 12px 0 var(--teal),
+        0px 18px 0 var(--teal), 6px 18px 0 var(--teal), 12px 18px 0 var(--teal), 18px 18px 0 var(--teal), 24px 18px 0 var(--teal), 30px 18px 0 var(--teal), 36px 18px 0 var(--teal), 42px 18px 0 var(--teal),
         /* R4 — nose */
-        4px 16px 0 var(--teal), 8px 16px 0 var(--teal), 12px 16px 0 #d4845a, 16px 16px 0 #d4845a, 20px 16px 0 var(--teal), 24px 16px 0 var(--teal),
+        6px 24px 0 var(--teal), 12px 24px 0 var(--teal), 18px 24px 0 #d4845a, 24px 24px 0 #d4845a, 30px 24px 0 var(--teal), 36px 24px 0 var(--teal),
         /* R5 — chin */
-        8px 20px 0 var(--teal), 12px 20px 0 var(--teal), 16px 20px 0 var(--teal), 20px 20px 0 var(--teal),
+        12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
         /* R6 — paws */
-        4px 24px 0 var(--teal), 8px 24px 0 var(--teal), 20px 24px 0 var(--teal), 24px 24px 0 var(--teal);
+        6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
     }
 
     @keyframes moleBlink {
       0%, 90%, 100% {
         box-shadow:
-          8px 0 0 var(--teal), 12px 0 0 var(--teal), 16px 0 0 var(--teal), 20px 0 0 var(--teal),
-          4px 4px 0 var(--teal), 8px 4px 0 var(--teal), 12px 4px 0 var(--teal), 16px 4px 0 var(--teal), 20px 4px 0 var(--teal), 24px 4px 0 var(--teal),
-          0px 8px 0 var(--teal), 4px 8px 0 var(--teal), 8px 8px 0 #fff, 12px 8px 0 var(--teal), 16px 8px 0 var(--teal), 20px 8px 0 #fff, 24px 8px 0 var(--teal), 28px 8px 0 var(--teal),
-          0px 12px 0 var(--teal), 4px 12px 0 var(--teal), 8px 12px 0 var(--teal), 12px 12px 0 var(--teal), 16px 12px 0 var(--teal), 20px 12px 0 var(--teal), 24px 12px 0 var(--teal), 28px 12px 0 var(--teal),
-          4px 16px 0 var(--teal), 8px 16px 0 var(--teal), 12px 16px 0 #d4845a, 16px 16px 0 #d4845a, 20px 16px 0 var(--teal), 24px 16px 0 var(--teal),
-          8px 20px 0 var(--teal), 12px 20px 0 var(--teal), 16px 20px 0 var(--teal), 20px 20px 0 var(--teal),
-          4px 24px 0 var(--teal), 8px 24px 0 var(--teal), 20px 24px 0 var(--teal), 24px 24px 0 var(--teal);
+          12px 0 0 var(--teal), 18px 0 0 var(--teal), 24px 0 0 var(--teal), 30px 0 0 var(--teal),
+          6px 6px 0 var(--teal), 12px 6px 0 var(--teal), 18px 6px 0 var(--teal), 24px 6px 0 var(--teal), 30px 6px 0 var(--teal), 36px 6px 0 var(--teal),
+          0px 12px 0 var(--teal), 6px 12px 0 var(--teal), 12px 12px 0 #fff, 18px 12px 0 var(--teal), 24px 12px 0 var(--teal), 30px 12px 0 #fff, 36px 12px 0 var(--teal), 42px 12px 0 var(--teal),
+          0px 18px 0 var(--teal), 6px 18px 0 var(--teal), 12px 18px 0 var(--teal), 18px 18px 0 var(--teal), 24px 18px 0 var(--teal), 30px 18px 0 var(--teal), 36px 18px 0 var(--teal), 42px 18px 0 var(--teal),
+          6px 24px 0 var(--teal), 12px 24px 0 var(--teal), 18px 24px 0 #d4845a, 24px 24px 0 #d4845a, 30px 24px 0 var(--teal), 36px 24px 0 var(--teal),
+          12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
+          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
       }
       93%, 97% {
-        /* eyes closed — white pixels become teal */
         box-shadow:
-          8px 0 0 var(--teal), 12px 0 0 var(--teal), 16px 0 0 var(--teal), 20px 0 0 var(--teal),
-          4px 4px 0 var(--teal), 8px 4px 0 var(--teal), 12px 4px 0 var(--teal), 16px 4px 0 var(--teal), 20px 4px 0 var(--teal), 24px 4px 0 var(--teal),
-          0px 8px 0 var(--teal), 4px 8px 0 var(--teal), 8px 8px 0 var(--teal), 12px 8px 0 var(--teal), 16px 8px 0 var(--teal), 20px 8px 0 var(--teal), 24px 8px 0 var(--teal), 28px 8px 0 var(--teal),
-          0px 12px 0 var(--teal), 4px 12px 0 var(--teal), 8px 12px 0 var(--teal), 12px 12px 0 var(--teal), 16px 12px 0 var(--teal), 20px 12px 0 var(--teal), 24px 12px 0 var(--teal), 28px 12px 0 var(--teal),
-          4px 16px 0 var(--teal), 8px 16px 0 var(--teal), 12px 16px 0 #d4845a, 16px 16px 0 #d4845a, 20px 16px 0 var(--teal), 24px 16px 0 var(--teal),
-          8px 20px 0 var(--teal), 12px 20px 0 var(--teal), 16px 20px 0 var(--teal), 20px 20px 0 var(--teal),
-          4px 24px 0 var(--teal), 8px 24px 0 var(--teal), 20px 24px 0 var(--teal), 24px 24px 0 var(--teal);
+          12px 0 0 var(--teal), 18px 0 0 var(--teal), 24px 0 0 var(--teal), 30px 0 0 var(--teal),
+          6px 6px 0 var(--teal), 12px 6px 0 var(--teal), 18px 6px 0 var(--teal), 24px 6px 0 var(--teal), 30px 6px 0 var(--teal), 36px 6px 0 var(--teal),
+          0px 12px 0 var(--teal), 6px 12px 0 var(--teal), 12px 12px 0 var(--teal), 18px 12px 0 var(--teal), 24px 12px 0 var(--teal), 30px 12px 0 var(--teal), 36px 12px 0 var(--teal), 42px 12px 0 var(--teal),
+          0px 18px 0 var(--teal), 6px 18px 0 var(--teal), 12px 18px 0 var(--teal), 18px 18px 0 var(--teal), 24px 18px 0 var(--teal), 30px 18px 0 var(--teal), 36px 18px 0 var(--teal), 42px 18px 0 var(--teal),
+          6px 24px 0 var(--teal), 12px 24px 0 var(--teal), 18px 24px 0 #d4845a, 24px 24px 0 #d4845a, 30px 24px 0 var(--teal), 36px 24px 0 var(--teal),
+          12px 30px 0 var(--teal), 18px 30px 0 var(--teal), 24px 30px 0 var(--teal), 30px 30px 0 var(--teal),
+          6px 36px 0 var(--teal), 12px 36px 0 var(--teal), 30px 36px 0 var(--teal), 36px 36px 0 var(--teal);
       }
     }
 
     @media (max-width: 680px) {
-      .mole-wrap { transform: translateX(-50%) scale(0.8); }
-      .mole-ground { width: 44px; height: 5px; }
+      .mole-wrap { transform: translateX(-50%) scale(0.75); }
+      .mole-ground { width: 60px; height: 6px; }
     }
   </style>
 </head>
@@ -777,7 +776,7 @@
     if (!ticking) {
       requestAnimationFrame(function(){
         const y = Math.min(window.scrollY / 250, 1);
-        mole.style.transform = 'translateX(-50%) translateY(' + (y * 36) + 'px)';
+        mole.style.transform = 'translateX(-50%) translateY(' + (y * 50) + 'px)';
         ticking = false;
       });
       ticking = true;
