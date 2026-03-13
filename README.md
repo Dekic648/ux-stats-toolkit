@@ -1,5 +1,10 @@
 # UX Research Statistics Toolkit
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Tools](https://img.shields.io/badge/Tools-12-1D9E75)](https://dekic648.github.io/ux-stats-toolkit/)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-7F77DD)](CONTRIBUTING.md)
+[![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-222)](https://dekic648.github.io/ux-stats-toolkit/)
+
 Free, open-source tools for researchers who want to get the stats right. No logins. No tracking. Just math.
 
 **[Browse the toolkit →](https://dekic648.github.io/ux-stats-toolkit/)**
@@ -73,6 +78,16 @@ Each tool is a standalone HTML file with inline CSS and vanilla JavaScript. No f
 ## Who this is for
 
 UX researchers, design teams, and anyone who runs usability studies and needs to back up their findings with the right statistics — without becoming a statistician.
+
+## Contributing
+
+This toolkit grows with contributions from the research community. Whether you want to propose a new tool, fix a bug, or improve an existing tool — you're welcome here.
+
+- **[Propose a new tool](../../issues/new?template=new-tool.yml)** — Describe the research problem and the statistical method
+- **[Report a bug](../../issues/new?template=bug-report.yml)** — Broken calculation? Layout issue? Let us know
+- **[Read the full contributing guide](CONTRIBUTING.md)** — Setup, code style, and PR guidelines
+
+No contribution is too small. Typo fixes, better explanations, mobile layout tweaks — it all makes the toolkit more useful for researchers.
 
 ## Author
 

@@ -1,0 +1,51 @@
+name: New Tool Proposal
+description: Suggest a new statistical tool for the toolkit
+labels: ["new tool", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a new tool! The best tools solve a real problem that UX researchers face regularly.
+  - type: input
+    id: tool-name
+    attributes:
+      label: Tool name
+      description: What would you call this tool?
+      placeholder: e.g. "Effect Size Calculator"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: Describe the research situation where this tool would help.
+      placeholder: "When I'm writing up results, I often need to... but there's no easy way to..."
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Statistical method
+      description: What calculation or framework should this tool implement? Link to a paper or textbook reference if you have one.
+    validations:
+      required: false
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Which chapter would it fit in?
+      options:
+        - "1 — Planning"
+        - "2 — Collecting & Coding"
+        - "3 — Analyzing"
+        - "4 — Rating & Scoring"
+        - "5 — Reporting"
+        - "Not sure"
+    validations:
+      required: false
+  - type: textarea
+    id: output
+    attributes:
+      label: What should the output look like?
+      description: What would a researcher copy-paste into their report?
+    validations:
+      required: false
