@@ -56,6 +56,53 @@
       }
     }
 
+    /* Manual theme overrides */
+    :root.light {
+      --bg-0: #ffffff;
+      --bg-1: #f5f4f0;
+      --bg-2: #eeecea;
+      --bg-card: rgba(255, 255, 255, 0.65);
+      --text-0: #1a1a18;
+      --text-1: #5f5e5a;
+      --text-2: #888780;
+      --purple: #7F77DD;
+      --purple-glow: rgba(127, 119, 221, 0.25);
+      --purple-soft: rgba(127, 119, 221, 0.08);
+      --teal: #1D9E75;
+      --teal-soft: rgba(29, 158, 117, 0.10);
+      --border: rgba(0, 0, 0, 0.06);
+      --border-hover: rgba(127, 119, 221, 0.35);
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --card-shadow-hover: 0 8px 30px rgba(127, 119, 221, 0.18), 0 2px 8px rgba(0,0,0,0.06);
+      --dot-color: rgba(0, 0, 0, 0.04);
+      --mesh-a: rgba(127, 119, 221, 0.12);
+      --mesh-b: rgba(29, 158, 117, 0.10);
+      --mesh-c: rgba(127, 119, 221, 0.06);
+    }
+
+    :root.dark {
+      --bg-0: #1c1c1a;
+      --bg-1: #252523;
+      --bg-2: #2e2e2b;
+      --bg-card: rgba(37, 37, 35, 0.6);
+      --text-0: #f0ede8;
+      --text-1: #b4b2a9;
+      --text-2: #888780;
+      --purple: #9F99E8;
+      --purple-glow: rgba(159, 153, 232, 0.22);
+      --purple-soft: rgba(159, 153, 232, 0.10);
+      --teal: #5DCAA5;
+      --teal-soft: rgba(93, 202, 165, 0.10);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(159, 153, 232, 0.35);
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+      --card-shadow-hover: 0 8px 30px rgba(159, 153, 232, 0.15), 0 2px 8px rgba(0,0,0,0.3);
+      --dot-color: rgba(255, 255, 255, 0.03);
+      --mesh-a: rgba(159, 153, 232, 0.10);
+      --mesh-b: rgba(93, 202, 165, 0.08);
+      --mesh-c: rgba(159, 153, 232, 0.05);
+    }
+
     /* ========================================
        Reset & Base
        ======================================== */
@@ -477,6 +524,132 @@
     }
 
     /* ========================================
+       Theme Toggle
+       ======================================== */
+    .theme-toggle {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 99;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      color: var(--text-1);
+      transition: border-color 0.3s, background 0.3s, transform 0.2s;
+      animation: fadeSlideUp 0.6s ease 0.1s both;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--border-hover);
+      background: var(--purple-soft);
+      transform: scale(1.08);
+    }
+
+    /* ========================================
+       Search Bar
+       ======================================== */
+    .search-wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 2rem 1.5rem;
+      position: relative;
+      z-index: 1;
+      animation: fadeSlideUp 0.6s ease 0.25s both;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1.1rem 0.75rem 2.6rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-0);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-2);
+    }
+
+    .search-input:focus {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 0 3px var(--purple-soft);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: calc(2rem + 0.85rem);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-2);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    .search-no-results {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-2);
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .chapter.hidden { display: none; }
+    .tool-card.hidden { display: none; }
+
+    /* ========================================
+       GitHub CTA
+       ======================================== */
+    .github-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .github-cta:hover {
+      border-color: var(--border-hover);
+      color: var(--purple);
+    }
+
+    .github-cta svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 680px) {
+      .search-wrap { padding: 0 1.25rem 1.25rem; }
+      .search-icon { left: calc(1.25rem + 0.85rem); }
+      .theme-toggle { top: 0.75rem; right: 0.75rem; width: 34px; height: 34px; font-size: 0.95rem; }
+    }
+
+    /* ========================================
        Scrollbar (subtle)
        ======================================== */
     ::-webkit-scrollbar {
@@ -602,6 +775,9 @@
 </head>
 <body>
 
+  <!-- ====== Theme Toggle ====== -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">&#9790;</button>
+
   <!-- ====== Hero ====== -->
   <section class="hero">
     <div class="hero-badge">Free &amp; Open Source</div>
@@ -610,6 +786,13 @@
     <a href="guide.html" class="guide-link"><span class="guide-icon">&#9782;</span> Read the Common Sense Guide</a>
     <div class="mole-wrap" id="mole"><div class="mole-pixel"></div></div>
   </section>
+
+  <!-- ====== Search ====== -->
+  <div class="search-wrap">
+    <span class="search-icon">&#9906;</span>
+    <input type="text" class="search-input" id="toolSearch" placeholder="Search tools by name, method, or keyword...">
+  </div>
+  <div class="search-no-results" id="noResults">No tools match your search.</div>
 
   <!-- ====== Tools ====== -->
   <section class="section">
@@ -749,10 +932,15 @@
   <!-- ====== Footer ====== -->
   <footer>
     <p>Built by <span>Milo Vandekic</span> · Grounded in <a href="https://groundedly.vercel.app" target="_blank" rel="noopener" style="color:var(--purple);text-decoration:none;font-weight:500">Groundedly</a></p>
+    <a href="https://github.com/Dekic648/ux-stats-toolkit" target="_blank" rel="noopener" class="github-cta">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Star on GitHub · Contribute a tool
+    </a>
   </footer>
 
 <script>
 (function(){
+  /* ---- Mole scroll ---- */
   const mole = document.getElementById('mole');
   let ticking = false;
   window.addEventListener('scroll', function(){
@@ -764,6 +952,57 @@
       });
       ticking = true;
     }
+  });
+
+  /* ---- Theme toggle ---- */
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+
+  function applyTheme(theme) {
+    root.classList.remove('light', 'dark');
+    if (theme !== 'auto') root.classList.add(theme);
+    toggle.textContent = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) ? '\u2600' : '\u263E';
+    localStorage.setItem('ux-toolkit-theme', theme);
+  }
+
+  var saved = localStorage.getItem('ux-toolkit-theme') || 'auto';
+  if (saved !== 'auto') applyTheme(saved);
+  else {
+    toggle.textContent = window.matchMedia('(prefers-color-scheme: dark)').matches ? '\u2600' : '\u263E';
+  }
+
+  toggle.addEventListener('click', function() {
+    var isDark = root.classList.contains('dark') ||
+      (!root.classList.contains('light') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+  /* ---- Search / filter ---- */
+  var searchInput = document.getElementById('toolSearch');
+  var noResults = document.getElementById('noResults');
+  var chapters = document.querySelectorAll('.chapter');
+
+  searchInput.addEventListener('input', function() {
+    var q = this.value.toLowerCase().trim();
+    var anyVisible = false;
+
+    chapters.forEach(function(chapter) {
+      var cards = chapter.querySelectorAll('.tool-card');
+      var chapterVisible = false;
+
+      cards.forEach(function(card) {
+        var name = card.querySelector('.tool-name').textContent.toLowerCase();
+        var desc = card.querySelector('.tool-desc').textContent.toLowerCase();
+        var match = !q || name.indexOf(q) !== -1 || desc.indexOf(q) !== -1;
+        card.classList.toggle('hidden', !match);
+        if (match) chapterVisible = true;
+      });
+
+      chapter.classList.toggle('hidden', !chapterVisible);
+      if (chapterVisible) anyVisible = true;
+    });
+
+    noResults.style.display = (q && !anyVisible) ? 'block' : 'none';
   });
 })();
 </script>
